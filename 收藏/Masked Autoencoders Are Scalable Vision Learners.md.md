@@ -1,10 +1,10 @@
-# Masked Autoencoders Are Scalable Vision Learners
+# MAE: Masked Autoencoders Are Scalable Vision Learners
 
 GPT2：Language Models **are** Unsupervised Multitask **Learners**
 
 GPT3：Language Models **are** Few-Shot **Learners**
 
-整整齐齐
+FAIR,He Kaiming
 
 ## Abstract
 
@@ -13,7 +13,7 @@ GPT3：Language Models **are** Few-Shot **Learners**
 MAE approach：mask random patches，然后重建。
 
 1. 设计了一个非对称编码器-解码器体系结构，其中的编码器仅在可见的patches子集上运行（没有mask tokens）。解码器为轻量级解码器，从 latent representation 和mask tokens重建原始图像。
-2. 发现mask 输入图像比例很高的时候（例如75%），生成了一个 nontrivial and meaningful自监督学习任务。
+2. 发现 mask 输入图像比例很高的时候（例如75%），生成了一个 nontrivial and meaningful自监督学习任务。
 
 这两种设计的结合使我们能够高效地训练大型模型：加快了训练速度3倍甚至更多，同时提高了准确性。
 
@@ -42,8 +42,8 @@ BERT训练词向量的方式，就是将一个句子中的这个单词mask掉，
 
 为什么masked auto-encoding 在图像和文本的任务上差距如此之大？
 
-1. **模型结构不同；**图像一般用的都是CNN，不好编码position embeddings这种位置相关的信息；对应的，现在有ViT这种transformer结构可以做到了；
-2. **图像和文本的信息密度不一样；**文本的语义密度更大，而图像本身来说，却是有严重空间冗余的；对应的，可以通过随机mask掉图像中的一大部分patches来降低空间冗余，从而强制模型学到一些跨空间的语义上的特征；
+1. **模型结构不同**；图像一般用的都是CNN，不好编码position embeddings这种位置相关的信息；对应的，现在有ViT这种transformer结构可以做到了；
+2. **图像和文本的信息密度不一样**；文本的语义密度更大，而图像本身来说，却是有严重空间冗余的；对应的，可以通过随机mask掉图像中的一大部分patches来降低空间冗余，从而强制模型学到一些跨空间的语义上的特征；
 3. **decoder重建是像素级别的任务**，相对于分类任务来说，学到的是一些low-level的feature，不足以用于语义相关的任务；虽然BERT中的decoder可以用一些简单的MLP来实现，但是对于图像来说，decoder的设计对于能学习到什么程度的语义来说非常重要；
 
 同时，由于mask掉了一部分输入，可以让一些更大模型的训练变快了；
